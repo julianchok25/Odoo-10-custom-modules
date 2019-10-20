@@ -33,7 +33,7 @@
     </record>
 
     <!-- actions opening views on models -->
-    <record model="ir.actions.act_window" id="test_quadi.action_window">
+    <record model="ir.actions.act_window" id="test_quadi.action_window_idea">
       <field name="name">test_quadi window</field>
       <field name="res_model">test_quadi.idea</field>
       <field name="view_mode">tree,form</field>
@@ -52,7 +52,7 @@
     <menuitem name="Quadi Votes" id="test_quadi.votes" parent="main_test_quadi"/>
      <!-- actions -->
     <menuitem name="Idea" id="test_quadi.idea" parent="test_quadi.votes" 
-      action="test_quadi.action_window"/>
+      action="test_quadi.action_window_idea"/>
 
   </data>
 </odoo>

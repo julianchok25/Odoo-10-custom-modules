@@ -1,0 +1,53 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="test_quadi.vote">
+      <field name="name">test_quadi list vote</field>
+      <field name="model">test_quadi.vote</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="qualy" placeholder="decimal number"/>
+          <field name="partner_id"/>
+          <field name="date"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="vote_form_view">
+      <field name="name">vote.form.view</field>
+      <field name="model">test_quadi.vote</field>
+      <field name="arch" type="xml">
+        <form string="Vote Form">
+          <sheet>
+            <group name="Vote">
+              <field name="name"/>
+              <field name="qualy"/>
+              <field name="partner_id"/>
+              <field name="date"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="test_quadi.action_window_vote">
+      <field name="name">test_quadi window vote</field>
+      <field name="res_model">test_quadi.vote</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to add a vote.
+          </p><p>
+            Rate an idea.
+          </p>
+        </field>
+    </record>
+
+
+    <menuitem name="Vote" id="test_quadi.vote_model" parent="test_quadi.votes" 
+      action="test_quadi.action_window_vote"/> 
+
+  </data>
+</odoo>
