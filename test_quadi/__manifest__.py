@@ -3,20 +3,20 @@
     'name': "test_quadi",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+        Test for quadi company with different requirements
+        """,
 
     'description': """
-        Long description of module's purpose
+        Solution to manage votes with ERP odoo
     """,
 
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
+    'author': "Julian Villegas",
+    'website': "https://medium.com/@david.villegasplus",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/10.0/odoo/addons/base/module/module_data.xml
     # for the full list
-    'category': 'Uncategorized',
+    'category': 'Quadi',
     'version': '0.1',
 
     # any module necessary for this one to work correctly
@@ -32,4 +32,6 @@
     'demo': [
         'demo/demo.xml',
     ],
+    "installable":True,
+    "application":True
 }
