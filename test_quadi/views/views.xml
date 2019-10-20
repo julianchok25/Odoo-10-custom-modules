@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="test_quadi.list">
+      <field name="name">test_quadi list</field>
+      <field name="model">test_quadi.test_quadi</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="test_quadi.action_window">
+      <field name="name">test_quadi window</field>
+      <field name="res_model">test_quadi.test_quadi</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="test_quadi.action_server">
+      <field name="name">test_quadi server</field>
+      <field name="model_id" ref="model_test_quadi_test_quadi"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="test_quadi" id="test_quadi.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="test_quadi.menu_1" parent="test_quadi.menu_root"/>
+    <menuitem name="Menu 2" id="test_quadi.menu_2" parent="test_quadi.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="test_quadi.menu_1_list" parent="test_quadi.menu_1"
+              action="test_quadi.action_window"/>
+    <menuitem name="Server to list" id="test_quadi" parent="test_quadi.menu_2"
+              action="test_quadi.action_server"/>
+    -->
+  </data>
+</odoo>
