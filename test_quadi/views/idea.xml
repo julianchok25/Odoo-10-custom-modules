@@ -21,11 +21,18 @@
         <form string="Idea Form">
           <sheet>
             <group name="Idea">
-              <field name="name"/>
-              <field name="group"/>
-              <field name="description"/>
-              <field name="vote"/>
-              <field name="qualy"/>
+              <group>
+                <field name="name"/>
+                <field name="group"/>
+                <field name="description"/>
+                <field name="vote"/>
+                <field name="qualy"/>
+              </group>
+              <group>
+                <field name="start_date"/>
+                <field name="end_date" placeholder="Deadline"/>
+                <field name="user_id"/>
+              </group>
             </group>
           </sheet>
         </form>
