@@ -1,0 +1,58 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <record model="ir.ui.view" id="test_quadi.list">
+      <field name="name">test_quadi list</field>
+      <field name="model">test_quadi.idea</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="group"/>
+          <field name="description"/>
+          <field name="vote"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="idea_form_view">
+      <field name="name">idea.form.view</field>
+      <field name="model">test_quadi.idea</field>
+      <field name="arch" type="xml">
+        <form string="Idea Form">
+          <sheet>
+            <group name="Idea">
+              <field name="name"/>
+              <field name="group"/>
+              <field name="description"/>
+              <field name="vote"/>
+              <field name="qualy"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="test_quadi.action_window">
+      <field name="name">test_quadi window</field>
+      <field name="res_model">test_quadi.idea</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to add an idea.
+          </p><p>
+            Register user opinions.
+          </p>
+        </field>
+    </record>
+
+    <!-- Top menu item -->
+    <menuitem name="Quadi Votes" id="main_test_quadi"/>
+    <!-- menu categories -->
+    <menuitem name="Quadi Votes" id="test_quadi.votes" parent="main_test_quadi"/>
+     <!-- actions -->
+    <menuitem name="Idea" id="test_quadi.idea" parent="test_quadi.votes" 
+      action="test_quadi.action_window"/>
+
+  </data>
+</odoo>
