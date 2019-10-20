@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_test_quadi_test_quadi,test_quadi.test_quadi,model_test_quadi_test_quadi,,1,0,0,0
+idea_manager,test_quadi.idea_manager,model_test_quadi_idea,group_manager_idea,1,1,1,1
+idea_readonly,test_quadi.idea_readonly,model_test_quadi_idea,group_read_idea,1,0,0,0
