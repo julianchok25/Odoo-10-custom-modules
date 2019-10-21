@@ -12,16 +12,37 @@ class Idea(models.Model):
         ('grp3','Group 3'),
         ], default='grp1', string='Group')
     description = fields.Text('Description')
-    vote = fields.Integer('Votes')
     qualy = fields.Float(compute="_compute_vote", store=True)
     start_date = fields.Datetime('Start date', default=fields.Datetime.now(), \
         domain="[('create_uid','=',user.id)]")
     end_date = fields.Datetime('End date', compute='_get_end_date', readonly=True)
-    user_id = fields.Many2one('res.users', string='Owner', default=lambda self: self.env.uid)
+    user_id = fields.Many2one('res.users', string='Owner', default=lambda self: self.env.uid, \
+        domain=[('partner_id.is_company','=',False)])
+    vote_ids = fields.One2many('test_quadi.vote', 'idea_id', \
+        string='Votes')
+    vote_count = fields.Integer('Votes', compute='_vote_count',
+        default=0, readonly=True)
+    #vote_id = fields.Many2one('test_quadi.vote')
 
-    @api.depends('vote')
+    @api.one    
+    @api.depends('vote_ids')
+    def _vote_count(self):
+        if self.vote_ids:
+            self.vote_count = len(self.vote_ids)
+        else:
+            self.vote_count = 0
+
+    @api.depends('vote_count')
     def _compute_vote(self):
-        self.qualy = float(self.vote) / 100
+        data_obj = self.env['test_quadi.vote'].search([('active_c','=', True)])
+        #a = 0 
+        #for x in data_obj:
+        #    a += 1
+        for r in self:
+            if not data_obj:
+                r.qualy = 0.0
+            else:
+                r.qualy =  (float(r.vote_count / float(len(data_obj)))) * 100.0
 
     @api.one
     @api.depends('start_date')

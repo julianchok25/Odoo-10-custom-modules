@@ -9,7 +9,8 @@
           <field name="name"/>
           <field name="group"/>
           <field name="description"/>
-          <field name="vote"/>
+          <field name="vote_count"/>
+          <field name="qualy" widget="progressbar"/>
         </tree>
       </field>
     </record>
@@ -25,8 +26,8 @@
                 <field name="name"/>
                 <field name="group"/>
                 <field name="description"/>
-                <field name="vote"/>
-                <field name="qualy"/>
+                <field name="vote_count"/>
+                <field name="qualy" widget="progressbar"/>
               </group>
               <group>
                 <field name="start_date"/>
