@@ -14,7 +14,7 @@ class Idea(models.Model):
     description = fields.Text('Description')
     qualy = fields.Float(compute="_compute_vote", store=True)
     start_date = fields.Datetime('Start date', default=fields.Datetime.now(), \
-        domain="[('create_uid','=',user.id)]")
+        attrs="{'readonly':[('create_uid','!=',self.env.uid)]}")
     end_date = fields.Datetime('End date', compute='_get_end_date', readonly=True)
     user_id = fields.Many2one('res.users', string='Owner', default=lambda self: self.env.uid, \
         domain=[('partner_id.is_company','=',False)])
@@ -54,3 +54,10 @@ class Idea(models.Model):
                 self.end_date = (start + duration)
             except:
                 pass
+
+    #@api.constrains('user_id')
+    #def _check_user_start_date(self):
+    #    for r in self:
+    #        if r.user_id != create_uid
+    #            raise exceptions.ValidationError("The initial date should only \
+    #            be placed by the person who created it")
