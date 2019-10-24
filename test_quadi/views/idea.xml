@@ -40,6 +40,35 @@
       </field>
     </record>
 
+    <!-- Search and filters -->
+    <record model="ir.ui.view" id="idea_search_view">
+      <field name="name">idea.search</field>
+      <field name="model">test_quadi.idea</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="description"/>
+          <field name="group"/>
+          <filter name="my_ideas" string="My Ideas"
+                  domain="[('user_id', '=', uid)]"/>
+          <filter name="vote_above_5" string="Votes gt 5"
+                  domain="[('vote_count', '&gt;=', 5)]"/>
+          <filter name="group1" string="Group 1"
+                  domain="[('group', '=', 'grp1')]"/>
+          <group string="Group By">
+            <filter name="owner" string="Owner"
+                    context="{'group_by': 'user_id'}"/>
+            <filter name="group" string="Groups"
+                    context="{'group_by': 'group'}"/>
+            <filter name="vote" string="Votes"
+                    context="{'group_by': 'vote_count'}"/>
+            <filter name="qualy" string="Score"
+                    context="{'group_by': 'qualy'}"/>
+          </group>  
+        </search>
+      </field>
+    </record>
+
     <!-- graph view -->
     <record model="ir.ui.view" id="idea_graph_view">
       <field name="name">idea.graph.view</field>
