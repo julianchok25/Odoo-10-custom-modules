@@ -31,11 +31,24 @@
       </field>
     </record>
 
+    <!-- graph view -->
+    <record model="ir.ui.view" id="vote_graph_view">
+      <field name="name">vote.graph.view</field>
+      <field name="model">test_quadi.vote</field>
+      <field name="arch" type="xml">
+        <graph string="statistics of ideas and votes" stacked="True">
+          <field name="idea_id" type="row"/>
+          <field name="user_id" type="row"/>
+          <!-- <field name="vote_count" type="measure"/> -->
+        </graph>
+      </field>
+    </record>
+
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="test_quadi.action_window_vote">
       <field name="name">test_quadi window vote</field>
       <field name="res_model">test_quadi.vote</field>
-      <field name="view_mode">tree,form</field>
+      <field name="view_mode">tree,form,graph</field>
       <field name="help" type="html">
           <p class="oe_view_nocontent_create">
             Click to add a vote.
