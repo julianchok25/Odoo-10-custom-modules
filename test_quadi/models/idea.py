@@ -12,7 +12,7 @@ class Idea(models.Model):
         ('grp3','Group 3'),
         ], default='grp1', string='Group')
     description = fields.Text('Description')
-    qualy = fields.Float(compute="_compute_vote", store=True)
+    qualy = fields.Float(digits=(3, 2), compute="_compute_vote", store=True)
     start_date = fields.Datetime('Start date', default=fields.Datetime.now(), \
         attrs="{'readonly':[('create_uid','!=',self.env.uid)]}")
     end_date = fields.Datetime('End date', compute='_get_end_date', readonly=True)
@@ -21,8 +21,9 @@ class Idea(models.Model):
     vote_ids = fields.One2many('test_quadi.vote', 'idea_id', \
         string='Votes')
     vote_count = fields.Integer('Votes', compute='_vote_count',
-        default=0, readonly=True)
+        default=0, readonly=True, store=True)
     #vote_id = fields.Many2one('test_quadi.vote')
+    user_vote = fields.Char(related='vote_ids.user_id.name', readonly=True, store=True)
 
     @api.one    
     @api.depends('vote_ids')
@@ -32,6 +33,7 @@ class Idea(models.Model):
         else:
             self.vote_count = 0
 
+    @api.one
     @api.depends('vote_count')
     def _compute_vote(self):
         data_obj = self.env['test_quadi.vote'].search([('active_c','=', True)])
