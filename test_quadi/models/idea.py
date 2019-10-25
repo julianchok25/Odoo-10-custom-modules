@@ -13,17 +13,23 @@ class Idea(models.Model):
         ], default='grp1', string='Group')
     description = fields.Text('Description')
     qualy = fields.Float(digits=(3, 2), compute="_compute_vote", store=True)
-    start_date = fields.Datetime('Start date', default=fields.Datetime.now(), \
-        attrs="{'readonly':[('create_uid','!=',self.env.uid)]}")
+    start_date = fields.Datetime('Start date', default=fields.Datetime.now())
     end_date = fields.Datetime('End date', compute='_get_end_date', readonly=True)
     user_id = fields.Many2one('res.users', string='Owner', default=lambda self: self.env.uid, \
-        domain=[('partner_id.is_company','=',False)])
+        domain=[('partner_id.is_company','=',False)], readonly=True)
     vote_ids = fields.One2many(comodel_name='test_quadi.vote', inverse_name='idea_id', \
         string='Votes')
     vote_count = fields.Integer('Votes', compute='_vote_count',
         default=0, readonly=True, store=True)
-    #vote_id = fields.Many2one('test_quadi.vote')
     user_vote = fields.Char(related='vote_ids.user_id.name', readonly=True, store=True)
+    #Boolean that compute value to that field based on the checking it is related user or not. 
+    is_record_user = fields.Boolean('Is Owner?', compute='_get_uid')
+
+    @api.one
+    @api.depends('user_id')
+    def _get_uid(self):
+        if self.env['res.users'].browse(self.env.uid) == self.user_id:
+            self.is_record_user = True
 
     @api.one    
     @api.depends('vote_ids')
