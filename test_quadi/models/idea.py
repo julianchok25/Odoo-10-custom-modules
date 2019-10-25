@@ -18,7 +18,7 @@ class Idea(models.Model):
     end_date = fields.Datetime('End date', compute='_get_end_date', readonly=True)
     user_id = fields.Many2one('res.users', string='Owner', default=lambda self: self.env.uid, \
         domain=[('partner_id.is_company','=',False)])
-    vote_ids = fields.One2many('test_quadi.vote', 'idea_id', \
+    vote_ids = fields.One2many(comodel_name='test_quadi.vote', inverse_name='idea_id', \
         string='Votes')
     vote_count = fields.Integer('Votes', compute='_vote_count',
         default=0, readonly=True, store=True)
